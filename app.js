@@ -53,10 +53,10 @@ console.log("UI Controller");
 			h4Elem.appendChild(spanElem);
 			divElement.appendChild(h4Elem);
 	},
-		populateAllBudget: function(){
-			uiController.getInput().incomeTicker.textContent=budgetController.displayData().totalIncome;
-			uiController.getInput().expenseTicker.textContent=budgetController.displayData().totalExpense;
-			uiController.getInput().grandTotal.textContent = (budgetController.displayData().totalIncome - budgetController.displayData().totalExpense);
+		populateAllBudget: function(expenseObj){
+			incomeTicker.textContent=expenseObj.totalIncome;
+			expenseTicker.textContent=expenseObj.totalExpense;
+			grandTotal.textContent = (expenseObj.totalIncome - expenseObj.totalExpense);
 		}
 	};
 })();
@@ -129,8 +129,11 @@ var appController = (function(){
 		uiController.createLedgerColumn(uiController.getInput().expenseGrid, uiController.getInput().desc, uiController.getInput().value);
 	}
 
-	//calculate total income/expense and populate in UI
-	uiController.populateAllBudget();
+	//Calculate total income/expense
+	var expenseObj = budgetController.displayData();
+
+	//populate total income expense in UI
+	uiController.populateAllBudget(expenseObj);
 	
 });
 
