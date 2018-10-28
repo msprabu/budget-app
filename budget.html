@@ -9,22 +9,22 @@
 <body>
     <div class="container text-center">
         <div class="container" id="grandTotal">
-<p>Available budget in October 2018:</p>
-<h2>$2500</h2>
+<p>Available budget in October 2018: </p>
+<h2 >$ <span id="grandTotalSpan"></span></h2>
         </div>
 <div class="container" id="tickerSection">
-<p>Income <span id="incomeDollar">$</span></p>
-<p>Expense <span id="expenseDollar">$</span></p>
+<p>Income: $ <span id="incomeDollar"></span></p>
+<p>Expense: $ <span id="expenseDollar"></span></p>
 </div>
 <div class="container" id="inputSection">
-    <form id="inputSubmit" action="#" method="GET">
-    <select><option >-</option><option>+</option> </select> <input id="itemDesc"> <input type="number" min="1" id="itemValue"> <button id="submit">Submit</button>
+    <form id="inputSubmit" action="#">
+    <select id="selectOperator"><option>+</option><option >-</option> </select> <input id="itemDesc"> <input type="number" min="1" id="itemValue" step="any"> <button id="submit">Submit</button>
     </form>
 </div>
 <div class="container expense-list-grid">
 <div class="row">
     <div class="col-md-6" id="incomeGrid">
-<h4>Income</h4>
+        <h4>Income</h4>
     </div>
     <div class="col-md-6" id="expenseGrid">
 <h4>Expense</h4>
