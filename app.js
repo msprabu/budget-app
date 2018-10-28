@@ -52,7 +52,12 @@ console.log("UI Controller");
 			spanElem.textContent = value;
 			h4Elem.appendChild(spanElem);
 			divElement.appendChild(h4Elem);
-	}
+	},
+		populateAllBudget: function(){
+			uiController.getInput().incomeTicker.textContent=budgetController.displayData().totalIncome;
+			uiController.getInput().expenseTicker.textContent=budgetController.displayData().totalExpense;
+			uiController.getInput().grandTotal.textContent = (budgetController.displayData().totalIncome - budgetController.displayData().totalExpense);
+		}
 	};
 })();
 
@@ -70,8 +75,16 @@ console.log("Budget controller");
 		this.value=value;
 	};
 
-	var data = {
+	var calcSum = function(obj){
+		console.log(obj);
+		var sum=0;
+		obj.forEach(function(item){
+			sum = sum+Number(item.value);
+		});
+		return sum;
+	}
 
+	var data = {
 		allItems: {
 			exp: [],
 			inc: []
@@ -88,12 +101,11 @@ console.log("Budget controller");
 				newObj = new Expense(desc,value);
 				data.allItems.exp.push(newObj);
 			}
-			return newObj;
 		},
 		displayData: function(){
 			return {
-				expenseData: data.allItems.exp,
-				incomeData: data.allItems.inc,
+				totalIncome: calcSum( data.allItems.inc),
+				totalExpense: calcSum( data.allItems.exp)
 			}
 		}
 	}
@@ -117,23 +129,9 @@ var appController = (function(){
 		uiController.createLedgerColumn(uiController.getInput().expenseGrid, uiController.getInput().desc, uiController.getInput().value);
 	}
 
-	//Calculate and add tobudget
-	uiController.getInput().incomeTicker.textContent=calcAll(budgetController.displayData().incomeData);
-	uiController.getInput().expenseTicker.textContent=calcAll(budgetController.displayData().expenseData);
-	uiController.getInput().grandTotal.textContent = (uiController.getInput().incomeTicker.textContent - uiController.getInput().expenseTicker.textContent);
-
-	//Function to calculate total income/expense
-	function calcAll(obj){
-		console.log(obj);
-		var sum=0;
-		obj.forEach(function(item){
-			sum = sum+Number(item.value);
-		});
-
-		return sum;
-}
-
-
+	//calculate total income/expense and populate in UI
+	uiController.populateAllBudget();
+	
 });
 
 })();
