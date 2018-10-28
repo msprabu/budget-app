@@ -10,3 +10,7 @@
 #itemValue{
     width: 70px;
 }
+
+#dollarVal{
+	float: right;
+}
